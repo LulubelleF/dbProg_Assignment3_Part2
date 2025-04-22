@@ -75,9 +75,15 @@ BEGIN
 
     IF v_trans_no IS NULL THEN
       OPEN cur_rows(NULL);
-      FETCH cur_rows(NULL)
-        INTO v_date, v_desc, v_dummy_acct, v_dummy_type, v_dummy_amt;
-      CLOSE cur_rows(NULL);
+
+FETCH cur_rows
+  INTO v_date,
+       v_desc,
+       v_dummy_acct,
+       v_dummy_type,
+       v_dummy_amt;
+
+CLOSE cur_rows;
 
       INSERT INTO WKIS_ERROR_LOG
         (transaction_no, transaction_date, description, error_msg)
